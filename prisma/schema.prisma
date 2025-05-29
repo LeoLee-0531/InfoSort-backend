@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model InformationItem {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String    @map("user_id") // LINE User ID
+  type             String    // "link", "image", "document"
+  originalContent  String    @map("original_content")
+  title            String?
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  tagAssociations  ItemTagAssociation[] // Relation to the join table
+
+  @@map("information_items")
+}
+
+model Tag {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  name             String    @unique
+  description      String?
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  itemAssociations ItemTagAssociation[] // Relation to the join table
+
+  @@map("tags")
+}
+
+model ItemTagAssociation {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  itemId  String   @map("item_id") @db.ObjectId // Foreign key to InformationItem
+  tagId   String   @map("tag_id") @db.ObjectId  // Foreign key to Tag
+
+  item    InformationItem @relation(fields: [itemId], references: [id], onDelete: Cascade) // If item is deleted, associations are deleted
+  tag     Tag             @relation(fields: [tagId], references: [id], onDelete: Cascade) // If tag is deleted, associations are deleted
+
+  @@unique([itemId, tagId], name: "item_tag_unique_constraint") // Composite unique index
+  @@map("item_tag_associations")
+}
