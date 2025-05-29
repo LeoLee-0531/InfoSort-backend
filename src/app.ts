@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import swaggerUi from 'swagger-ui-express';
 
 import informationItemRoutes from './routes/informationItemRoutes';
 import tagRoutes from './routes/tagRoutes';
