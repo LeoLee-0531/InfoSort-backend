@@ -8,6 +8,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  lineUserId       String    @id @map("_id") // LINE User ID
+  createdAt        DateTime  @default(now()) @map("created_at")
+
+  informationItems InformationItem[] // Relation to InformationItem
+
+  @@map("users")
+}
+
 model InformationItem {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
   userId           String    @map("user_id") // LINE User ID
@@ -17,6 +26,7 @@ model InformationItem {
   createdAt        DateTime  @default(now()) @map("created_at")
   updatedAt        DateTime  @updatedAt @map("updated_at")
 
+  user             User      @relation(fields: [userId], references: [lineUserId])
   tagAssociations  ItemTagAssociation[] // Relation to the join table
 
   @@map("information_items")
