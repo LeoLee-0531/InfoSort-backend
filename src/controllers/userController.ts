@@ -8,6 +8,51 @@ import {
 } from '../services/userService';
 import { HttpError } from '../middleware/errorHandler';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - lineUserId
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: 使用者ID (自動產生)
+ *         lineUserId:
+ *           type: string
+ *           description: 使用者的 LINE User ID
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: 使用者建立時間
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: 使用者最後更新時間
+ *       example:
+ *         id: 1
+ *         lineUserId: "U1234567890abcdef1234567890abcdef"
+ *         createdAt: "2025-06-02T10:00:00.000Z"
+ *         updatedAt: "2025-06-02T10:00:00.000Z"
+ *   requestBodies:
+ *     UserBody:
+ *       description: 建立新使用者的請求內容
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - lineUserId
+ *             properties:
+ *               lineUserId:
+ *                 type: string
+ *                 description: 使用者的 LINE User ID
+ *                 example: "U1234567890abcdef1234567890abcdef"
+ */
+
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { lineUserId } = req.body;

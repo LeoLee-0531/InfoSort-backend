@@ -1,6 +1,56 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { itemTagAssociationService } from '../services/itemTagAssociationService';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     ItemTagAssociation:
+ *       type: object
+ *       required:
+ *         - itemId
+ *         - tagId
+ *       properties:
+ *         itemId:
+ *           type: string
+ *           description: 資訊項目的ID
+ *         tagId:
+ *           type: string
+ *           description: 標籤的ID
+ *         assignedAt:
+ *           type: string
+ *           format: date-time
+ *           description: 指派時間
+ *         assignedBy:
+ *           type: string
+ *           description: 指派者的使用者ID (在此範例中，我們假設是 item 的 userId)
+ *       example:
+ *         itemId: "clxko2b0o0000v7qy8s7b2r7n"
+ *         tagId: "clxkr1c1o0000v7qy8s7b2r7n"
+ *         assignedAt: "2025-06-02T12:00:00.000Z"
+ *         assignedBy: "U1234567890abcdef1234567890abcdef"
+ *   requestBodies:
+ *     ItemTagAssociationBody:
+ *       description: 建立資訊項目與標籤關聯的請求內容
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - itemId
+ *               - tagId
+ *             properties:
+ *               itemId:
+ *                 type: string
+ *                 description: 資訊項目的ID
+ *                 example: "clxko2b0o0000v7qy8s7b2r7n"
+ *               tagId:
+ *                 type: string
+ *                 description: 標籤的ID
+ *                 example: "clxkr1c1o0000v7qy8s7b2r7n"
+ */
+
 // 定義控制器方法的介面
 interface IItemTagAssociationController {
   addTagToItem: RequestHandler;

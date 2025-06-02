@@ -1,6 +1,61 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { tagService } from '../services/tagService';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Tag:
+ *       type: object
+ *       required:
+ *         - name
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: 標籤ID (自動產生)
+ *         name:
+ *           type: string
+ *           description: 標籤名稱 (唯一)
+ *         description:
+ *           type: string
+ *           nullable: true
+ *           description: 標籤描述
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: 建立時間
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: 最後更新時間
+ *       example:
+ *         id: "clxkr1c1o0000v7qy8s7b2r7n"
+ *         name: "重要"
+ *         description: "標示重要的項目"
+ *         createdAt: "2025-06-02T10:00:00.000Z"
+ *         updatedAt: "2025-06-02T11:00:00.000Z"
+ *   requestBodies:
+ *     TagBody:
+ *       description: 建立或更新標籤的請求內容
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: 標籤名稱
+ *                 example: "工作"
+ *               description:
+ *                 type: string
+ *                 nullable: true
+ *                 description: 標籤描述
+ *                 example: "與工作相關的項目"
+ */
+
 // 定義控制器方法的介面以提高清晰度
 interface ITagController {
   getAllTags: RequestHandler;
