@@ -36,6 +36,7 @@ model Tag {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
   name             String    @unique
   description      String?
+  userId           String    @map("user_id") // LINE User ID
   createdAt        DateTime  @default(now()) @map("created_at")
   updatedAt        DateTime  @updatedAt @map("updated_at")
 

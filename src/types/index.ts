@@ -8,6 +8,7 @@ export interface InformationItemInput {
 export interface TagInput {
   name: string;
   description?: string;
+  userId: string;
 }
 
 export interface ItemTagAssociationInput {
