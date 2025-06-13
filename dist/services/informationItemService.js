@@ -15,20 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.informationItemService = void 0;
 const client_1 = __importDefault(require("../prisma/client"));
 exports.informationItemService = {
-    // 獲取所有資訊項目
-    getAllItems: (userId) => __awaiter(void 0, void 0, void 0, function* () {
-        const filter = userId ? { userId } : {};
-        return client_1.default.informationItem.findMany({
-            where: filter,
-            include: {
-                tagAssociations: {
-                    include: {
-                        tag: true
-                    }
-                }
-            }
-        });
-    }),
     // 根據 ID 獲取資訊項目
     getItemById: (id) => __awaiter(void 0, void 0, void 0, function* () {
         return client_1.default.informationItem.findUnique({

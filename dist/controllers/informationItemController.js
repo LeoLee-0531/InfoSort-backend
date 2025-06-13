@@ -12,17 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.informationItemController = void 0;
 const informationItemService_1 = require("../services/informationItemService");
 exports.informationItemController = {
-    // 獲取所有資訊項目
-    getAllItems: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const userId = req.query.userId;
-            const items = yield informationItemService_1.informationItemService.getAllItems(userId);
-            res.json(items);
-        }
-        catch (error) {
-            next(error);
-        }
-    }),
     // 根據 ID 獲取資訊項目
     getItemById: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {

@@ -3,8 +3,8 @@ import { InformationItemInput } from '../types';
 
 export const informationItemService = {
   // 獲取所有資訊項目
-  getAllItems: async (userId?: string) => {
-    const filter = userId ? { userId } : {};
+  getAllItems: async (userId: string) => {
+    const filter = { userId };
     return prisma.informationItem.findMany({
       where: filter,
       include: {
@@ -16,7 +16,7 @@ export const informationItemService = {
       }
     });
   },
-
+  
   // 根據 ID 獲取資訊項目
   getItemById: async (id: string) => {
     return prisma.informationItem.findUnique({

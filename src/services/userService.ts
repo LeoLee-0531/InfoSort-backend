@@ -26,16 +26,30 @@ export const getAllUsersService = async (): Promise<User[]> => {
 };
 
 export const getUserByLineUserIdService = async (lineUserId: string): Promise<User | null> => {
-  const user = await prisma.user.findUnique({
-    where: { lineUserId },
-    include: {
-      informationItems: true, // Include related information items
-    },
-  });
-  if (!user) {
-    throw new HttpError(404, `User with lineUserId '${lineUserId}' not found.`);
+  try {
+    if (!lineUserId || typeof lineUserId !== 'string' || lineUserId.trim() === '') {
+      throw new HttpError(400, 'LINE User ID 必須為有效的非空字串');
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { lineUserId: lineUserId.trim() },
+      include: {
+        informationItems: true, // Include related information items
+      },
+    });
+    
+    if (!user) {
+      throw new HttpError(404, `User with lineUserId '${lineUserId}' not found.`);
+    }
+    
+    return user;
+  } catch (error) {
+    console.error('getUserByLineUserIdService error:', error);
+    if (error instanceof HttpError) {
+      throw error;
+    }
+    throw new HttpError(500, 'Database error occurred while fetching user');
   }
-  return user;
 };
 
 // Update service might not be strictly necessary if only lineUserId and createdAt exist

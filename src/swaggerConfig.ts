@@ -14,8 +14,23 @@ const options: swaggerJsdoc.Options = {
         description: 'Production server',
       },
       {
-        url: 'http://localhost:3001', // Assuming your local server runs on port 3000
+        url: `http://localhost:4000`,
         description: 'Development server',
+      },
+    ],
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+          description: '請先呼叫 /api/auth/login 獲取 JWT，然後在此輸入 JWT 權杖',
+        },
+      },
+    },
+    security: [
+      {
+        BearerAuth: [],
       },
     ],
   },

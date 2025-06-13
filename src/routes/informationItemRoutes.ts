@@ -21,7 +21,7 @@ const router = Router();
  *         name: userId
  *         schema:
  *           type: string
- *         required: false
+ *         required: true
  *         description: 用戶的 ID，用於過濾特定用戶的資訊項目
  *     responses:
  *       200:

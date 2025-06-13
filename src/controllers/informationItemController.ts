@@ -182,7 +182,11 @@ export const informationItemController: IInformationItemController = {
   // 獲取所有資訊項目
   getAllItems: async (req, res, next) => {
     try {
-      const userId = req.query.userId as string | undefined;
+      const userId = req.query.userId as string; // 修改為 string
+      if (!userId) { // 新增檢查
+        res.status(400).json({ error: 'User ID is required' });
+        return;
+      }
       const items = await informationItemService.getAllItems(userId);
       res.json(items);
     } catch (error) {
