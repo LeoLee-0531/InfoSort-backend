@@ -7,7 +7,15 @@ export const informationItemService = {
     const filter = { userId };
     return prisma.informationItem.findMany({
       where: filter,
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true, // Added description field
+        type: true,
+        originalContent: true, // Corresponds to original_content
+        userId: true,          // Corresponds to user_id
+        createdAt: true,       // Corresponds to created_at
+        updatedAt: true,       // Corresponds to updated_at
         tagAssociations: {
           include: {
             tag: true
@@ -21,7 +29,15 @@ export const informationItemService = {
   getItemById: async (id: string) => {
     return prisma.informationItem.findUnique({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true, // Added description field
+        type: true,
+        originalContent: true, // Corresponds to original_content
+        userId: true,          // Corresponds to user_id
+        createdAt: true,       // Corresponds to created_at
+        updatedAt: true,       // Corresponds to updated_at
         tagAssociations: {
           include: {
             tag: true
@@ -58,7 +74,15 @@ export const informationItemService = {
     const filter = userId ? { type, userId } : { type };
     return prisma.informationItem.findMany({
       where: filter,
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true, // Added description field
+        type: true,
+        originalContent: true, // Corresponds to original_content
+        userId: true,          // Corresponds to user_id
+        createdAt: true,       // Corresponds to created_at
+        updatedAt: true,       // Corresponds to updated_at
         tagAssociations: {
           include: {
             tag: true

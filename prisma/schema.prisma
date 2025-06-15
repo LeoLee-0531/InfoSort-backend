@@ -23,6 +23,7 @@ model InformationItem {
   type             String    // "link", "image", "document"
   originalContent  String    @map("original_content")
   title            String?
+  description      String?   // Added description field
   createdAt        DateTime  @default(now()) @map("created_at")
   updatedAt        DateTime  @updatedAt @map("updated_at")
 

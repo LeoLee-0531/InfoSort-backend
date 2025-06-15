@@ -3,6 +3,7 @@ export interface InformationItemInput {
   type: string;
   originalContent: string;
   title?: string;
+  description?: string; // Added description field
 }
 
 export interface TagInput {
