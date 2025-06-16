@@ -14,6 +14,7 @@ export const informationItemService = {
         type: true,
         originalContent: true, // Corresponds to original_content
         userId: true,          // Corresponds to user_id
+        tags: true,            // Added tags field
         createdAt: true,       // Corresponds to created_at
         updatedAt: true,       // Corresponds to updated_at
         tagAssociations: {
@@ -36,6 +37,7 @@ export const informationItemService = {
         type: true,
         originalContent: true, // Corresponds to original_content
         userId: true,          // Corresponds to user_id
+        tags: true,            // Added tags field
         createdAt: true,       // Corresponds to created_at
         updatedAt: true,       // Corresponds to updated_at
         tagAssociations: {
@@ -81,6 +83,7 @@ export const informationItemService = {
         type: true,
         originalContent: true, // Corresponds to original_content
         userId: true,          // Corresponds to user_id
+        tags: true,            // Added tags field
         createdAt: true,       // Corresponds to created_at
         updatedAt: true,       // Corresponds to updated_at
         tagAssociations: {

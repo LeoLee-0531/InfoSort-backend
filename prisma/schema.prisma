@@ -24,6 +24,7 @@ model InformationItem {
   originalContent  String    @map("original_content")
   title            String?
   description      String?   // Added description field
+  tags             String[]  // Added tags array
   createdAt        DateTime  @default(now()) @map("created_at")
   updatedAt        DateTime  @updatedAt @map("updated_at")
 
